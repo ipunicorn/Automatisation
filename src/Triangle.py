@@ -9,21 +9,21 @@ class Triangle(Figure):
     name = 'Triangle'
 
     def __init__(self, a, b, c):
+        if a <= 0 or b <= 0 or c <= 0:
+            raise Exception('Cannot create triangle: values must be positive')
+        if (a + b) < c:
+            raise Exception('It is not possible to create a triangle with such sides, check the values')
+        if (b + c) < a:
+            raise Exception('It is not possible to create a triangle with such sides, check the values')
+        if (a + c) < b:
+            raise Exception('It is not possible to create a triangle with such sides, check the values')
+
         self.a = a
         self.b = b
         self.c = c
 
-        if not self.all_sides_positive():
-            raise Exception('Cannot create triangle: values must be positive')
-
         if not self.valid_triangle():
             raise Exception('It is not possible to create a triangle with such sides, check the values')
-
-    def all_sides_positive(self):
-        if self.a > 0 and self.b > 0 and self.c > 0:
-            return True
-
-        return False
 
     def valid_triangle(self):
         if (self.a + self.b) < self.c:
