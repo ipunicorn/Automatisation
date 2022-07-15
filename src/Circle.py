@@ -8,6 +8,15 @@ class Circle(Figure):
     def __init__(self, radius):
         self.radius = radius
 
+        if not self.radius_positive():
+            raise Exception('Cannot create circle: radius must be positive')
+
+    def radius_positive(self):
+        if self.radius > 0:
+            return True
+
+        return False
+
     def area(self):
         return math.pi * self.radius ** 2
 
