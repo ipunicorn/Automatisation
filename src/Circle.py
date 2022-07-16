@@ -6,7 +6,7 @@ class Circle(Figure):
     name = 'Circle'
 
     def __init__(self, radius):
-        if radius > 0:
+        if radius <= 0:
             raise Exception('Cannot create circle: radius must be positive')
 
         self.radius = radius
