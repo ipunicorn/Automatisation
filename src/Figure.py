@@ -4,11 +4,11 @@ from abc import abstractmethod
 class Figure:
     name = None
 
-    @abstractmethod
+    @property
     def area(self):
         pass
 
-    @abstractmethod
+    @property
     def perimeter(self):
         pass
 

@@ -7,7 +7,7 @@ class Rectangle(Figure):
     width = None
 
     def __init__(self, height, width):
-        if height <= 0 and width <= 0:
+        if height <= 0 or width <= 0:
             raise Exception('Cannot create rectangle: all sides must be positive')
 
         self.height = height
