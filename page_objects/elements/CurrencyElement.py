@@ -9,4 +9,3 @@ class CurrencyElement(BasePage):
     def change_currensy(self):
         self.click(self.element(self.CURRENCY_CHOISE))
         self.click(self.element(self.CURRENCY_LIST))
-

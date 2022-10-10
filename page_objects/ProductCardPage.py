@@ -15,4 +15,3 @@ class ProductCardPage(BasePage):
         self.click(self.element(self.DESCRIPTION_TAB))
         self.click(self.element(self.REVIEW_TAB))
         self.click(self.element(self.ADD_TO_CART_BUTTON))
-

@@ -1,7 +1,4 @@
 from page_objects.SignUpPage import SignUpPage
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
 from test_data.users import get_new_user
 
 
