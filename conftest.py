@@ -1,45 +1,56 @@
 import pytest
-from src.Circle import Circle
-from src.Rectangle import Rectangle
-from src.Square import Square
-from src.Triangle import Triangle
+import os
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--browser", default="safari", help="browser for tests"
+    )
+    parser.addoption(
+        "--drivers", default=os.path.expanduser("~/Downloads/drivers")
+    )
+    parser.addoption(
+        "--headless", action="store_true", help="browser to run tests"
+    )
+    parser.addoption(
+        "--base_url", default="http://localhost/", help="base url for tests"
+    )
 
 
 @pytest.fixture
-def default_circle():
-    return Circle(radius=10)
+def browser(request):
+    drivers_folder = request.config.getoption("--drivers")
+    browser_name = request.config.getoption("--browser")
+    headless = request.config.getoption("--headless")
+    base_url = request.config.getoption("--base_url")
 
+    if browser_name == "chrome":
+        options = webdriver.ChromeOptions()
+        service = ChromeService(executable_path=f"{drivers_folder}/chromedriver",)
+        if headless:
+            options.headless = True
+        _driver = webdriver.Chrome(service=service, options=options)
+    elif browser_name == "safari":
+        _driver = webdriver.Safari()
+    elif browser_name == "firefox":
+        _driver = webdriver.Firefox(executable_path=f"{drivers_folder}/geckodriver")
+    elif browser_name == "yandex":
+        options = webdriver.ChromeOptions()
+        if headless:
+            options.headless = True
+        service = ChromeService(executable_path=f"{drivers_folder}/yandexdriver")
+        _driver = webdriver.Chrome(service=service, options=options)
+    elif browser_name == "safari":
+        _driver = webdriver.Safari()
+    else:
+        raise ValueError(f"Browser {browser_name} is not supported.")
 
-@pytest.fixture
-def default_square():
-    return Square(height=10)
+    _driver.base_url = base_url
+    _driver.maximize_window()
 
+    yield _driver
 
-@pytest.fixture
-def default_rectangle():
-    return Rectangle(height=10, width=20)
-
-
-@pytest.fixture
-def default_triangle():
-    return Triangle(a=3, b=4, c=5)
-
-
-@pytest.fixture
-def other_circle():
-    return Circle(radius=5)
-
-
-@pytest.fixture
-def other_square():
-    return Square(height=5)
-
-
-@pytest.fixture
-def other_rectangle():
-    return Rectangle(height=5, width=10)
-
-
-@pytest.fixture
-def other_triangle():
-    return Triangle(a=6, b=8, c=10)
+    _driver.close()
+    
