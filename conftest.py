@@ -53,3 +53,4 @@ def browser(request):
     yield _driver
 
     _driver.close()
+    
