@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from page_objects.BasePage import BasePage
 
@@ -9,6 +10,7 @@ class MainPage(BasePage):
     MY_ACCOUNT = (By.XPATH, "//*[@title='My Account']")
     HEADER = (By.CSS_SELECTOR, '#logo .img-responsive')
 
+    @allure.step("Клики по элементам")
     def click_to_elements(self):
         self.click(self.element(self.CART_BUTTON))
         self.click(self.element(self.SLIDESHOW))

@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from page_objects.BasePage import BasePage
 
@@ -9,6 +10,7 @@ class CatalogPage(BasePage):
     PRODUCTS = (By.CSS_SELECTOR, '.product-layout')
     PAGES_COUNTER = (By.CSS_SELECTOR, '.col-sm-6.text-right')
 
+    @allure.step("Клики по элементам")
     def click_to_elements(self):
         self.click(self.element(self.BREADCRUMB))
         self.click(self.element(self.LEFT_MENU))
