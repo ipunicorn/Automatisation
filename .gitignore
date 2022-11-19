@@ -2,8 +2,6 @@
 venv
 .pytest_cache
 __pycache__
-.venv
-.pytest_cache
 .example.py
 .allure-report
 .allure-results
