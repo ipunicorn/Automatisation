@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from page_objects.BasePage import BasePage
 
@@ -9,6 +10,7 @@ class ProductCardPage(BasePage):
     DESCRIPTION_TAB = (By.XPATH, "//*[@data-toggle='tab']")
     REVIEW_TAB = (By.XPATH, "//*[@data-toggle='tab']")
 
+    @allure.step("Клики по элементам")
     def click_to_elements(self):
         self.click(self.element(self.BREADCRUMB))
         self.click(self.element(self.RATING_BLOCK))

@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from page_objects.BasePage import BasePage
 
@@ -20,17 +21,20 @@ class AdminPage(BasePage):
     DELETE_PRODUCT = (By.XPATH, "//*[@data-original-title='Delete']")
     CHECKBOX_TO_DELETE = (By.XPATH, "//*[@name='selected[]']")
 
+    @allure.step("Логин под админом")
     def admin_login(self, username, password):
         self._input(self.element(self.USERNAME_INPUT), username)
         self._input(self.element(self.PASSWORD_INPUT), password)
         self.click(self.element(self.LOGIN_BUTTON))
         return self
 
+    @allure.step("Перехожу к каталогу")
     def go_to_products(self):
         self.click(self.element(self.CATALOG_ITEM))
         self.click(self.element(self.PRODUCTS_LIST_LINK))
         return self
 
+    @allure.step("Добавляю карточку товара")
     def add_card(self, productname, meta, model):
         self.click(self.element(self.ADD_NEW))
         self._input(self.element(self.PRODUCT_NAME), productname)
@@ -40,10 +44,12 @@ class AdminPage(BasePage):
         self.click(self.element(self.SAVE_PRODUCT))
         return self
 
+    @allure.step("Удаляю карточку товара")
     def delete_card(self):
         self.click(self.element(self.CHECKBOX_TO_DELETE))
         self.click(self.element(self.DELETE_PRODUCT))
 
+    @allure.step("Клики по элементам")
     def click_to_elements(self):
         self.click(self.element(self.USERNAME_INPUT))
         self.click(self.element(self.PASSWORD_INPUT))

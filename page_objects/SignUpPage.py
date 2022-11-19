@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from page_objects.BasePage import BasePage
 
@@ -24,11 +25,13 @@ class SignUpPage(BasePage):
         self.click(self.element(self.CONTINUE_BUTTON))
         return self
 
+    @allure.step("Переход на страницу регистрации")
     def go_to_sign_up(self):
         self.click(self.element(self.MY_ACCOUNT))
         self.click(self.element(self.REGISTER_LINK))
         return self
 
+    @allure.step("Клики по элементам")
     def click_to_elements(self):
         self.click(self.element(self.FIRST_NAME_INPUT))
         self.click(self.element(self.LAST_NAME_INPUT))

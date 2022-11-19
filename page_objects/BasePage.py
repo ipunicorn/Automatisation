@@ -1,3 +1,5 @@
+import allure
+
 from selenium.webdriver import ActionChains
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
@@ -19,5 +21,7 @@ class BasePage:
         except TimeoutException:
             raise AssertionError(f"Не дождался видимости элемента {locator}")
 
+    @allure.step("Клик по элементу")
     def click(self, element):
+        #self.logger.info(f"Click to {element} element")
         ActionChains(self.driver).move_to_element(element).pause(0.1).click().perform()
