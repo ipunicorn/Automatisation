@@ -1,15 +1,6 @@
 pipeline {
   agent any
   stages {
-     stage('Pull browser') {
-        steps {
-           catchError {
-              script {
-      	        docker.image('selenoid/chrome:107.0')
-      	      }
-           }
-        }
-     }
      stage('Install deps') {
         steps {
             sh 'pip3 install -r requirements.txt '
