@@ -8,7 +8,7 @@ from selenium.webdriver.support.events import EventFiringWebDriver, AbstractEven
 
 def pytest_addoption(parser):
     parser.addoption("--browser", default="chrome", help="browser for tests")
-    parser.addoption("--base_url", default="http://127.0.0.1:4444/wd/hub", help="base url for tests")
+    parser.addoption("--base_url", default="https://demo.opencart.com", help="base url for tests")
     parser.addoption("--log_level", action="store", default="DEBUG")
     parser.addoption("--executor", action="store", default="127.0.0.1")
     parser.addoption("--mobile", action="store_true")
@@ -103,9 +103,6 @@ def browser(request):
         desired_capabilities=caps,
         options=options
     )
-
-#if browser_name == "safari":
-    #    driver = webdriver.Safari()
 
     driver = EventFiringWebDriver(driver, MyListener())
     driver.test_name = request.node.name
